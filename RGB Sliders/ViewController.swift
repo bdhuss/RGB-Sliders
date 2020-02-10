@@ -9,20 +9,36 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    let redLabel = UILabel()
-    let greenLabel = UILabel()
-    let blueLabel = UILabel()
+    
+    var redLabel: UILabel!
+    var greenLabel: UILabel!
+    var blueLabel: UILabel!
+    
+    var redSlider: UISlider!
+    var greenSlideer: UISlider!
+    var blueSlider: UISlider!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Set app background to white
-        self.view.backgroundColor = UIColor.white
+        initUIObjects()
+    }
+    
+    func initUIObjects() {
+        view.backgroundColor = UIColor.white
         
-        // set up labels
-        redLabel.text = "Red"
-        redLabel.textColor = .black
-        self.view.addSubview(redLabel)
+        redLabel = UILabel()
+        redLabel.frame = CGRect(x: UIScreen.main.bounds.width / 2 - 50, y: 50, width: 100, height: 50)
+        redLabel.text = "RED"
+        redLabel.font = UIFont.systemFont(ofSize: 40)
+        redLabel.textAlignment = .center
+        view.addSubview(redLabel)
+        
+        redSlider = UISlider(frame: CGRect(x: 20, y: 100, width: 335, height: 15))
+        redSlider.minimumValue = 0
+        redSlider.maximumValue = 255
+        redSlider.value = 255 / 2
+        view.addSubview(redSlider)
         
     }
 
