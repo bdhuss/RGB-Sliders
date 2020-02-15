@@ -30,33 +30,34 @@ class ViewController: UIViewController {
         view.backgroundColor = UIColor.white
         
         redLabel = UILabel()
-        redLabel.frame = CGRect(x: view.bounds.width / 2 - 50, y: 50, width: 100, height: 50)
+//        redLabel.frame = CGRect(x: view.bounds.width / 2 - 50, y: 50, width: 100, height: 50)
         redLabel.text = "RED"
         redLabel.font = UIFont.systemFont(ofSize: 40)
         redLabel.textAlignment = .center
-        // autoresizingMask used for orientation positioning
-        redLabel.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin]
+//        autoresizingMask used for orientation positioning
+//        redLabel.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin]
         view.addSubview(redLabel)
         
-        redSlider = UISlider(frame: CGRect(x: 20, y: 100, width: 335, height: 15))
+        redSlider = UISlider()
+//        redSlider = UISlider(frame: CGRect(x: 20, y: 100, width: 335, height: 15))
         redSlider.minimumValue = 0
         redSlider.maximumValue = 1
         redSlider.value = 1
         redSlider.isContinuous = true
         redSlider.addTarget(self, action: #selector(ViewController.slidersChanged(_:)), for: .valueChanged)
-        // autoresizingMask used for orientation positioning
-        redSlider.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin]
+//        autoresizingMask used for orientation positioning
+//        redSlider.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin]
         view.addSubview(redSlider)
         
         greenLabel = UILabel()
-        //greenLabel.frame = CGRect(x: view.bounds.width / 2 - 75, y: 120, width: 150, height: 50)
+//        greenLabel.frame = CGRect(x: view.bounds.width / 2 - 75, y: 120, width: 150, height: 50)
         greenLabel.text = "GREEN"
         greenLabel.font = UIFont.systemFont(ofSize: 40)
         greenLabel.textAlignment = .center
         view.addSubview(greenLabel)
         
         greenSlider = UISlider()
-        //greenSlider = UISlider(frame: CGRect(x: 20, y: 170, width: 335, height: 15))
+//        greenSlider = UISlider(frame: CGRect(x: 20, y: 170, width: 335, height: 15))
         greenSlider.minimumValue = 0
         greenSlider.maximumValue = 1
         greenSlider.value = 1
@@ -65,14 +66,14 @@ class ViewController: UIViewController {
         view.addSubview(greenSlider)
         
         blueLabel = UILabel()
-        //blueLabel.frame = CGRect(x: view.bounds.width / 2 - 50, y: 190, width: 100, height: 50)
+//        blueLabel.frame = CGRect(x: view.bounds.width / 2 - 50, y: 190, width: 100, height: 50)
         blueLabel.text = "BLUE"
         blueLabel.font = UIFont.systemFont(ofSize: 40)
         blueLabel.textAlignment = .center
         view.addSubview(blueLabel)
         
         blueSlider = UISlider()
-        //blueSlider = UISlider(frame: CGRect(x: 20, y: 240, width: 335, height: 15))
+//        blueSlider = UISlider(frame: CGRect(x: 20, y: 240, width: 335, height: 15))
         blueSlider.minimumValue = 0
         blueSlider.maximumValue = 1
         blueSlider.value = 1
@@ -94,19 +95,27 @@ class ViewController: UIViewController {
     
     // Determine the orientation of the device and place labels/sliders accordingly (Green & Blue)
     override func viewWillLayoutSubviews() {
-        // Landscape orientation
-        if UIDevice.current.orientation.isLandscape {
-            greenLabel.frame = CGRect(x: view.bounds.width / 2 - 75, y: 120, width: 150, height: 50)
-            greenSlider.frame = CGRect(x: 238.5, y: 170, width: 335, height: 15)
-            blueLabel.frame = CGRect(x: view.bounds.width / 2 - 50, y: 190, width: 100, height: 50)
-            blueSlider.frame = CGRect(x: 238.5, y: 240, width: 335, height: 15)
-        }
-        // Portrait orientation
-        else {
-            greenLabel.frame = CGRect(x: view.bounds.width / 2 - 75, y: 120, width: 150, height: 50)
-            greenSlider.frame = CGRect(x: 20, y: 170, width: 335, height: 15)
-            blueLabel.frame = CGRect(x: view.bounds.width / 2 - 50, y: 190, width: 100, height: 50)
-            blueSlider.frame = CGRect(x: 20, y: 240, width: 335, height: 15)
-        }
+//        // Landscape orientation
+//        if UIDevice.current.orientation.isLandscape {
+//            greenLabel.frame = CGRect(x: view.bounds.width / 2 - 75, y: 120, width: 150, height: 50)
+//            greenSlider.frame = CGRect(x: 238.5, y: 170, width: 335, height: 15)
+//            blueLabel.frame = CGRect(x: view.bounds.width / 2 - 50, y: 190, width: 100, height: 50)
+//            blueSlider.frame = CGRect(x: 238.5, y: 240, width: 335, height: 15)
+//        }
+//        // Portrait orientation
+//        else {
+//            greenLabel.frame = CGRect(x: view.bounds.width / 2 - 75, y: 120, width: 150, height: 50)
+//            greenSlider.frame = CGRect(x: 20, y: 170, width: 335, height: 15)
+//            blueLabel.frame = CGRect(x: view.bounds.width / 2 - 50, y: 190, width: 100, height: 50)
+//            blueSlider.frame = CGRect(x: 20, y: 240, width: 335, height: 15)
+//        }
+        
+        // Adjust size and location of object relative to screen size and orientation. All object attached to top label
+        redLabel.frame = CGRect(x: 35, y: 35, width: CGFloat(view.bounds.width - (35 * 2)), height: 35)
+        redSlider.frame = CGRect(x: redLabel.frame.minX, y: redLabel.frame.maxY, width: redLabel.frame.width, height: redLabel.frame.height)
+        greenLabel.frame = CGRect(x: redLabel.frame.minX, y: redSlider.frame.maxY, width: redLabel.frame.width, height: redLabel.frame.height)
+        greenSlider.frame = CGRect(x: redLabel.frame.minX, y: greenLabel.frame.maxY, width: redLabel.frame.width, height: redLabel.frame.height)
+        blueLabel.frame = CGRect(x: redLabel.frame.minX, y: greenSlider.frame.maxY, width: redLabel.frame.width, height: redLabel.frame.height)
+        blueSlider.frame = CGRect(x: redLabel.frame.minX, y: blueLabel.frame.maxY, width: redLabel.frame.width, height: redLabel.frame.height)
     }
 }
